@@ -1,5 +1,9 @@
 import logging
+import sys
 import os
+
+# Fix for Vercel deployment: ensure the api directory is in the path for absolute imports
+sys.path.append(os.path.dirname(__file__))
 import uuid
 from dotenv import load_dotenv
 from typing import List
