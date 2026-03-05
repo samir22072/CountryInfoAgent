@@ -115,12 +115,3 @@ npm run dev
 - `NEXT_PUBLIC_API_BASE_URL`: The URL of the backend API (default: `http://localhost:8000`).
 
 ---
-
-## 🔗 Git Configuration
-
-To push changes to the repository:
-```bash
-git remote add origin https://github.com/samir22072/CountryInfoAgent.git
-git branch -M main
-git push -u origin main
-```
