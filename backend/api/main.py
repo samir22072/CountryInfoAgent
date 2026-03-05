@@ -40,6 +40,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+@app.get("/")
+async def root():
+    return {"status": "ok", "message": "Country Info Agent API is running"}
+
 @app.post("/chat", status_code=202)
 async def start_chat(req: ChatRequest, background_tasks: BackgroundTasks):
     logger.info("Received chat request")
