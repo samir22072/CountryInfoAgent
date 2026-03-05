@@ -10,15 +10,23 @@ The system follows a classic **Micro-Frontend/Service** pattern, decoupled via a
 
 ```mermaid
 graph TD
-    User((User)) -->|React Web App| Frontend[Next.js Frontend]
-    Frontend -->|POST /chat| API[FastAPI Gateway]
-    API -->|Background Task| Worker[LangGraph Agent Worker]
-    API -->|destination| index["/api/index.py"]
-    Worker -->|Invoke| LLM[Google Gemini LLM]
-    Worker -->|Fetch| Tool[REST Countries API]
-    Worker -->|Update Status| DB[(In-Memory Task Store)]
-    Frontend -->|GET /chat/task_id| API
-    API -->|Read| DB
+    User((User)) -->|Interact| Frontend[Next.js Frontend]
+    
+    subgraph "Vercel Backend"
+        Index["FastAPI (api/index.py)"]
+        Worker["LangGraph Agent Worker"]
+        Store[("In-Memory Task Store")]
+    end
+
+    Frontend -->|POST /chat| Index
+    Index -->|Trigger| Worker
+    Worker -->|Update| Store
+    Index -->|Read| Store
+    
+    Worker -->|Prompt| LLM["Google Gemini LLM"]
+    Worker -->|Fetch| Tool["REST Countries API"]
+    
+    Frontend -->|Poll /chat/{id}| Index
 ```
 
 ### Components:
