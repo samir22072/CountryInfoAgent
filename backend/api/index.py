@@ -32,11 +32,15 @@ load_dotenv(os.path.join(os.path.dirname(os.path.dirname(__file__)), ".env"))
 app = FastAPI(title="Country Info Agent API")
 
 # Allow CORS for Next.js frontend
-allow_origins = os.environ.get("ALLOW_ORIGINS", "http://localhost:3000,http://127.0.0.1:3000").split(",")
+raw_origins = os.environ.get("ALLOW_ORIGINS", "http://localhost:3000,http://127.0.0.1:3000")
+allow_origins = [o.strip() for o in raw_origins.split(",") if o.strip()]
+
+logger.info(f"CORS Allowed Origins: {allow_origins}")
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=allow_origins,
+    allow_origin_regex="https://.*\\.vercel\\.app", # Support all Vercel deployments
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
