@@ -17,23 +17,21 @@ A full-stack application featuring a sophisticated AI agent that provides detail
 ```bash
 country-info-agent/
 ├── backend/                # Python FastAPI Backend
-│   ├── api/                # Serverless function logic (required by Vercel)
-│   │   ├── index.py        # Entry point for Vercel
-│   │   ├── graph.py
-│   │   ├── nodes.py
-│   │   ├── models.py
-│   │   ├── llm_factory.py
-│   │   └── config.json
-│   ├── vercel.json         # Backend-specific Vercel config
-│   ├── requirements.txt    # Vercel deployment dependencies
+│   ├── api/                # Backend API implementation
+│   │   ├── index.py        # API Entry point
+│   │   ├── graph.py        # LangGraph workflow
+│   │   ├── nodes.py        # Graph node logic
+│   │   ├── models.py       # Data models
+│   │   ├── llm_factory.py  # LLM initialization
+│   │   └── config.json     # Configuration and prompts
 │   ├── .env                # Local environment variables
-│   └── pyproject.toml      # Local dependency management (Poetry)
+│   └── pyproject.toml      # Dependency management
 ├── frontend/               # Next.js Frontend
 │   ├── src/                # React components and pages
 │   ├── public/             # Static assets
 │   ├── tailwind.config.ts  # Styling configuration
 │   └── package.json        # Frontend dependencies
-├── .gitignore              # Project-wide git exclusions
+├── .gitignore              # Git exclusions
 └── README.md               # You are here!
 ```
 
@@ -54,7 +52,7 @@ The backend utilizes **LangGraph** to manage the AI's "thought process" as a sta
 
 ## 🛠 Tech Stack
 
-- **Backend**: Python 3.10+, FastAPI, LangGraph, LangChain, Pydantic, Poetry.
+- **Backend**: Python 3.10+, FastAPI, LangGraph, LangChain, Pydantic.
 - **Frontend**: Next.js 15 (App Router), React 19, Tailwind CSS, Lucide React.
 - **LLM**: Google Gemini (via `langchain-google-genai`).
 
@@ -65,7 +63,6 @@ The backend utilizes **LangGraph** to manage the AI's "thought process" as a sta
 ### Prerequisites
 - Python 3.10+
 - Node.js 18+
-- [Poetry](https://python-poetry.org/docs/#installation) (optional, but recommended for backend)
 - Google API Key (for Gemini)
 
 ### 1. Backend Setup
@@ -94,7 +91,7 @@ npm install
 ### Start the Backend
 From the `backend` directory:
 ```bash
-python main.py
+python api/index.py
 # The API will be available at http://localhost:8000
 ```
 
@@ -111,32 +108,8 @@ npm run dev
 
 ### Backend (`backend/.env`)
 - `GOOGLE_API_KEY`: Your Google Gemini API key.
-- `ALLOW_ORIGINS`: (Optional) Comma-separated list of allowed CORS origins (default: `http://localhost:3000`).
+- `ALLOW_ORIGINS`: (Optional) Comma-separated list of allowed CORS origins.
 - `MODEL_NAME`: (Optional) The LLM model to use (default: `gemini-2.0-flash`).
 
 ### Frontend (`frontend/.env.local`)
 - `NEXT_PUBLIC_API_BASE_URL`: The URL of the backend API (default: `http://localhost:8000`).
-
----
-
----
-
-## 🚀 Deployment (Vercel)
-
-This project can be deployed on Vercel as two separate projects (Backend and Frontend).
-
-### 1. Backend Deployment
-- **Root Directory**: `backend`
-- **Environment Variables**:
-    - `GOOGLE_API_KEY`: Your Gemini API Key.
-- **Framework Preset**: Other (Vercel will detect `vercel.json`).
-
-### 2. Frontend Deployment
-- **Root Directory**: `frontend`
-- **Environment Variables**:
-    - `NEXT_PUBLIC_API_BASE_URL`: The URL of your deployed backend (e.g., `https://your-backend.vercel.app`).
-- **Framework Preset**: Next.js.
-
----
-
----
