@@ -2,15 +2,12 @@ import logging
 import sys
 import os
 
-# Fix for Vercel deployment: ensure the api directory is in the path for absolute imports
 sys.path.append(os.path.dirname(__file__))
 import uuid
 from dotenv import load_dotenv
 from typing import List
-from fastapi import FastAPI, HTTPException, BackgroundTasks, Request
-from fastapi.responses import JSONResponse
+from fastapi import FastAPI, HTTPException, BackgroundTasks
 from fastapi.middleware.cors import CORSMiddleware
-
 from langchain_core.messages import HumanMessage, AIMessage
 from graph import graph
 from models import ChatRequest, TaskStatus, ChatMessage
@@ -40,7 +37,6 @@ logger.info(f"CORS Allowed Origins: {allow_origins}")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=allow_origins,
-    allow_origin_regex="https://.*\\.vercel\\.app", # Support all Vercel deployments
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

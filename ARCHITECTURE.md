@@ -13,7 +13,7 @@ graph TD
     User((User)) -->|React Web App| Frontend[Next.js Frontend]
     Frontend -->|POST /chat| API[FastAPI Gateway]
     API -->|Background Task| Worker[LangGraph Agent Worker]
-    API -->|destination| index[/api/index.py]
+    API -->|destination| index["/api/index.py"]
     Worker -->|Invoke| LLM[Google Gemini LLM]
     Worker -->|Fetch| Tool[REST Countries API]
     Worker -->|Update Status| DB[(In-Memory Task Store)]
