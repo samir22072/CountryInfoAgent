@@ -26,7 +26,7 @@ graph TD
     Worker -->|Prompt| LLM["Google Gemini LLM"]
     Worker -->|Fetch| Tool["REST Countries API"]
     
-    Frontend -->|Poll /chat/{id}| Index
+    Frontend -->|"Poll /chat/{id}"| Index
 ```
 
 ### Components:
