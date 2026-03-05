@@ -24,7 +24,7 @@ logging.basicConfig(
 )
 logger = logging.getLogger("backend")
 
-load_dotenv()
+load_dotenv(os.path.join(os.path.dirname(os.path.dirname(__file__)), ".env"))
 app = FastAPI(title="Country Info Agent API")
 # Vercel needs 'app' to be the entry point
 handler = app

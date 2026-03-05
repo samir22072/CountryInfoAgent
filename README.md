@@ -17,14 +17,17 @@ A full-stack application featuring a sophisticated AI agent that provides detail
 ```bash
 country-info-agent/
 ├── backend/                # Python FastAPI Backend
-│   ├── main.py             # API endpoints and background task management
-│   ├── graph.py            # LangGraph workflow definition
-│   ├── nodes.py            # Individual graph node logic (Logic/Tools)
-│   ├── models.py           # Pydantic state and message models
-│   ├── llm_factory.py      # Multi-model LLM instantiation logic
-│   ├── config.json         # Prompt templates and tool configuration
-│   ├── .env                # Environment variables (API Keys)
-│   └── pyproject.toml      # Python dependencies (Poetry)
+│   ├── api/                # Serverless function logic (required by Vercel)
+│   │   ├── main.py
+│   │   ├── graph.py
+│   │   ├── nodes.py
+│   │   ├── models.py
+│   │   ├── llm_factory.py
+│   │   └── config.json
+│   ├── vercel.json         # Backend-specific Vercel config
+│   ├── requirements.txt    # Vercel deployment dependencies
+│   ├── .env                # Local environment variables
+│   └── pyproject.toml      # Local dependency management (Poetry)
 ├── frontend/               # Next.js Frontend
 │   ├── src/                # React components and pages
 │   ├── public/             # Static assets
@@ -113,5 +116,27 @@ npm run dev
 
 ### Frontend (`frontend/.env.local`)
 - `NEXT_PUBLIC_API_BASE_URL`: The URL of the backend API (default: `http://localhost:8000`).
+
+---
+
+---
+
+## 🚀 Deployment (Vercel)
+
+This project can be deployed on Vercel as two separate projects (Backend and Frontend).
+
+### 1. Backend Deployment
+- **Root Directory**: `backend`
+- **Environment Variables**:
+    - `GOOGLE_API_KEY`: Your Gemini API Key.
+- **Framework Preset**: Other (Vercel will detect `vercel.json`).
+
+### 2. Frontend Deployment
+- **Root Directory**: `frontend`
+- **Environment Variables**:
+    - `NEXT_PUBLIC_API_BASE_URL`: The URL of your deployed backend (e.g., `https://your-backend.vercel.app`).
+- **Framework Preset**: Next.js.
+
+---
 
 ---
