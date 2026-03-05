@@ -69,7 +69,9 @@ The backend utilizes **LangGraph** to manage the AI's "thought process" as a sta
 ```bash
 cd backend
 # Install dependencies
-pip install -r requirements.txt  # Or 'poetry install'
+poetry install
+# Enter the virtual environment
+poetry shell
 # Configure environment
 cp .env.example .env
 # Edit .env and add your GOOGLE_API_KEY
@@ -108,3 +110,17 @@ npm run dev
 - `GOOGLE_API_KEY`: Your Google Gemini API key.
 - `ALLOW_ORIGINS`: (Optional) Comma-separated list of allowed CORS origins (default: `http://localhost:3000`).
 - `MODEL_NAME`: (Optional) The LLM model to use (default: `gemini-2.0-flash`).
+
+### Frontend (`frontend/.env.local`)
+- `NEXT_PUBLIC_API_BASE_URL`: The URL of the backend API (default: `http://localhost:8000`).
+
+---
+
+## 🔗 Git Configuration
+
+To push changes to the repository:
+```bash
+git remote add origin https://github.com/samir22072/CountryInfoAgent.git
+git branch -M main
+git push -u origin main
+```
