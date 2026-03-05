@@ -30,8 +30,6 @@ logger = logging.getLogger("backend")
 
 load_dotenv(os.path.join(os.path.dirname(os.path.dirname(__file__)), ".env"))
 app = FastAPI(title="Country Info Agent API")
-# Vercel needs 'app' to be the entry point
-handler = app
 
 # Allow CORS for Next.js frontend
 allow_origins = os.environ.get("ALLOW_ORIGINS", "http://localhost:3000,http://127.0.0.1:3000").split(",")

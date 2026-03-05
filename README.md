@@ -18,7 +18,7 @@ A full-stack application featuring a sophisticated AI agent that provides detail
 country-info-agent/
 ├── backend/                # Python FastAPI Backend
 │   ├── api/                # Serverless function logic (required by Vercel)
-│   │   ├── main.py
+│   │   ├── index.py        # Entry point for Vercel
 │   │   ├── graph.py
 │   │   ├── nodes.py
 │   │   ├── models.py
