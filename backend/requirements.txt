@@ -1,6 +1,6 @@
 fastapi==0.115.8
 uvicorn==0.34.0
-langchain-core==0.3.36
+langchain-core>=0.3.37
 langchain-google-genai==2.0.10
 langgraph==0.2.73
 requests==2.32.3
