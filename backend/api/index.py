@@ -37,6 +37,7 @@ logger.info(f"CORS Allowed Origins: {allow_origins}")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=allow_origins,
+    allow_origin_regex="https://.*\\.vercel\\.app", # Support all Vercel deployments
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
